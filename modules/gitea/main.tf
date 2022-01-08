@@ -1,31 +1,9 @@
-terraform {
-    required_providers {
-      docker = {
-          source="kreuzwerker/docker"
-          version = "2.15.0"
-      }
-    }
-}
-
-provider "docker" {
-  
-}
-
 resource "docker_network" "network" {
   name = "home_lab"
   driver = "bridge"
   attachable = true
 }
 
-# resource "docker_volume" "vol_db" {
-#   name = "gitea-db"
-#   driver = "local"
-# }
-
-# resource "docker_volume" "vol_app" {
-#   name = "gitea"
-#   driver = "local"
-# }
 
 resource "docker_image" "pg_db" {
   name = "postgres:13"
@@ -43,8 +21,6 @@ resource "docker_container" "gitea_db" {
   restart = "always"
   remove_volumes = false
   volumes {
-    # volume_name = docker_volume.vol_db.name
-    # host_path = docker_volume.vol_db.mountpoint
     host_path = var.db_mount_path
     container_path = "/var/lib/postgresql/data"
   }
@@ -73,8 +49,6 @@ resource "docker_container" "gitea" {
     "GITEA__database__PASSWD=${var.db_password}"
   ]
   volumes {
-    # volume_name = docker_volume.vol_app.name
-    # host_path = docker_volume.vol_app.mountpoint
     host_path = var.gitea_mount_path
     container_path = "/data"
   }

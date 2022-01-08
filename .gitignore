@@ -29,3 +29,5 @@ override.tf.json
 # example: *tfplan*
 #*.tfvars
 # gitea/.terraform*
+modules/gitea/.terraform
+modules/gitea/.terraform.lock.hcl
