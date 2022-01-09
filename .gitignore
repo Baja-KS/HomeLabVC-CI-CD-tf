@@ -31,3 +31,4 @@ override.tf.json
 # gitea/.terraform*
 modules/gitea/.terraform
 modules/gitea/.terraform.lock.hcl
+sensitive.auto.tfvars
