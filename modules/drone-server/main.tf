@@ -21,6 +21,10 @@ resource "docker_container" "drone_server" {
     host_path = var.drone_data_mount_path
     container_path = "/data"
   }
+  volumes {
+    host_path = "/var/run/docker.sock"
+    container_path = "/var/run/docker.sock"
+  }
 
   ports {
     internal = 80

@@ -17,5 +17,19 @@ module "drone_server" {
   reg_username          = var.reg_username
   reg_pass              = var.reg_pass
   ssh_private_key       = var.ssh_private_key
-  drone_username = var.drone_username
+  drone_username        = var.drone_username
+}
+
+module "drone_runner_amd64" {
+  source            = "./modules/drone-runner"
+  drone_server_host = var.drone_server_host
+  drone_rpc_secret  = var.drone_rpc_secret
+}
+
+module "drone_runner_arm32v7" {
+  source            = "./modules/drone-runner"
+  drone_server_host = var.drone_server_host
+  drone_rpc_secret  = var.drone_rpc_secret
+  runner_host       = "ssh://pi@192.168.1.198:22"
+  container_name    = "drone-runner-arm"
 }

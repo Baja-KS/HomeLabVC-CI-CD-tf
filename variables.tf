@@ -61,5 +61,5 @@ variable "ssh_private_key" {
 }
 
 variable "drone_username" {
-  type=string
+  type = string
 }
